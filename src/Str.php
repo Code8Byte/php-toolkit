@@ -61,4 +61,20 @@ class Str
 
         return rtrim($truncated) . $suffix;
     }
+
+    /**
+     * Generate a random alphanumeric string of a given length.
+     */
+    public static function randomString(int $length = 16): string
+    {
+        $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        $max = strlen($chars) - 1;
+        $result = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $result .= $chars[random_int(0, $max)];
+        }
+
+        return $result;
+    }
 }

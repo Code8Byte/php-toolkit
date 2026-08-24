@@ -33,4 +33,12 @@ class StrTest extends TestCase
         $this->assertSame('The quick brown...', Str::truncate('The quick brown fox jumps', 17));
         $this->assertSame('Short text', Str::truncate('Short text', 100));
     }
+
+    public function test_random_string(): void
+    {
+        $result = Str::randomString(10);
+        $this->assertSame(10, strlen($result));
+        $this->assertMatchesRegularExpression('/^[A-Za-z0-9]+$/', $result);
+        $this->assertNotSame(Str::randomString(10), Str::randomString(10));
+    }
 }
