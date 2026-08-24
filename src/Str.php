@@ -77,4 +77,23 @@ class Str
 
         return $result;
     }
+
+    /**
+     * Validate an Indonesian NIK (16-digit national ID number) format.
+     * Checks length and structure only, not against government records.
+     */
+    public static function isValidNik(string $nik): bool
+    {
+        if (!preg_match('/^\d{16}$/', $nik)) {
+            return false;
+        }
+
+        $day = (int) substr($nik, 6, 2);
+        $month = (int) substr($nik, 8, 2);
+
+        // Female NIKs encode day as day+40
+        $day = $day > 40 ? $day - 40 : $day;
+
+        return $day >= 1 && $day <= 31 && $month >= 1 && $month <= 12;
+    }
 }

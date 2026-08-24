@@ -41,4 +41,12 @@ class StrTest extends TestCase
         $this->assertMatchesRegularExpression('/^[A-Za-z0-9]+$/', $result);
         $this->assertNotSame(Str::randomString(10), Str::randomString(10));
     }
+
+    public function test_is_valid_nik(): void
+    {
+        $this->assertTrue(Str::isValidNik('3271011503900001'));
+        $this->assertTrue(Str::isValidNik('3271015503900001')); // female DOB encoding
+        $this->assertFalse(Str::isValidNik('123'));
+        $this->assertFalse(Str::isValidNik('327101ab03900001'));
+    }
 }
